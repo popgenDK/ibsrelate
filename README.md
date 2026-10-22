@@ -10,14 +10,14 @@ For further details, including the interpretation of R0, R1 and KING-robust kins
 
 **IBS** and **realSFS** are two methods implemented in [ANGSD](https://github.com/ANGSD/angsd) that can be used to estimate the allele sharing *genotype distribution* for a pair of individuals. The paper describes and examines the differences between the two methods, but we expect they both will perform comparably well for most applications. Below are links to two R scripts that can be used to load the output of **IBS** and **realSFS** and produce estimates of **R0**, **R1** and **KING-robust kinship**.
 
-- https://github.com/rwaples/freqfree_suppl/blob/master/read_IBS.R
-- https://github.com/rwaples/freqfree_suppl/blob/master/read_realSFS.R
+- [read_IBS.R](read_IBS.R)
+- [read_realSFS.R](read_realSFS.R)
 
 ## Application to the ANGSD example data
 
-The shell commands given below are available in a text file here: https://github.com/rwaples/freqfree_suppl/blob/master/example_data.sh
+The shell commands given below are available in a text file here: [example_data.sh](example_data.sh)
 
-They are also available in a Jupyter notebook (slightly older version): https://nbviewer.jupyter.org/github/rwaples/freqfree_suppl/blob/master/example_data.ipynb
+They are also available in a Jupyter notebook (slightly older version): [example_data.ipynb](example_data.ipynb)
 
 ### Setup
 
@@ -57,7 +57,7 @@ for i in bams/*.bam;do samtools index $i;done
 mkdir results_realsfs
 
 # get the R script to parse the realSFS output
-wget https://raw.githubusercontent.com/rwaples/freqfree_suppl/master/read_realSFS.R
+wget https://raw.githubusercontent.com/popgenDK/ibsrelate/main/read_realSFS.R
 ```
 
 #### Specify an allele at each site
@@ -135,7 +135,7 @@ Rscript \
 mkdir results_IBS
 
 # get the R script to parse the IBS output
-wget https://raw.githubusercontent.com/rwaples/freqfree_suppl/master/read_IBS.R
+wget https://raw.githubusercontent.com/popgenDK/ibsrelate/main/read_IBS.R
 
 ## make a file with paths to the bam(s) for all individuals
 ls bams/*.bam > all.filelist
@@ -221,6 +221,18 @@ When considering inbreeding, it can be useful to compare the heterozygosities of
 The best starting point is aligned sequencing reads (bam files). The above example shows how to process these into all of the intermediate and final outputs.
 
 The program [NgsRelate v2](https://github.com/ANGSD/NgsRelate) ([paper](http://academic.oup.com/gigascience/article-abstract/8/5/giz034/5481763)) can also be used to estimate R0, R1, or KING-robust kinship. It can take multiple formats including BAM, VCF and GLF. Please notice that NgsRelate v2 has its own implementation of something very close to the SFS-based method described in the paper, and so it assumes that you know one of the alleles that is present at each site.
+
+## Files
+
+| File | What it is |
+|---|---|
+| [read_IBS.R](read_IBS.R) | R functions to read the output of `misc/ibs` and compute R0, R1 and KING-robust kinship |
+| [read_realSFS.R](read_realSFS.R) | R function to read a 2D SFS from `realSFS` and compute the same statistics |
+| [example_data.sh](example_data.sh) | The full example above as one shell script |
+| [example_data.ipynb](example_data.ipynb) | The example as a Jupyter notebook (slightly older version) |
+| [paper/](paper) | Notebook with the demography and ascertainment analyses from the paper |
+
+These files were first published in [rwaples/freqfree_suppl](https://github.com/rwaples/freqfree_suppl), the supplement to the paper.
 
 ## Citation
 
